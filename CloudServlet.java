@@ -154,11 +154,24 @@ public class CloudServlet extends HttpServlet {
 
     public Connection getConnection() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(
-            "jdbc:mysql://localhost:3306/cloud_db",
-            "root",
-            "root123"
-        );
+        
+        // Use environment variables for Render, fallback to local defaults if not set
+        String dbUrl = System.getenv("DB_URL");
+        if (dbUrl == null || dbUrl.isEmpty()) {
+            dbUrl = "jdbc:mysql://localhost:3306/cloud_db";
+        }
+        
+        String dbUser = System.getenv("DB_USER");
+        if (dbUser == null || dbUser.isEmpty()) {
+            dbUser = "root";
+        }
+        
+        String dbPass = System.getenv("DB_PASS");
+        if (dbPass == null || dbPass.isEmpty()) {
+            dbPass = "root123";
+        }
+        
+        return DriverManager.getConnection(dbUrl, dbUser, dbPass);
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res)

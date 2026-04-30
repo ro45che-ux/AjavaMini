@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: cloud-servlet-app
+    env: docker
+    plan: free # Uses the free tier by default
+    envVars:
+      - key: DB_URL
+        value: "jdbc:mysql://<your-database-host>:3306/cloud_db" # Replace with your actual MySQL database URL
+      - key: DB_USER
+        value: "root"
+      - key: DB_PASS
+        value: "root123"
