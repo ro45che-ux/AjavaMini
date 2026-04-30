@@ -160,14 +160,28 @@ public class CloudServlet extends HttpServlet {
             throw new Exception("DB_URL environment variable is missing! Please set it in Render Dashboard.");
         }
         
-        // Render provides 'postgres://...' but JDBC needs 'jdbc:postgresql://...'
-        if (dbUrl.startsWith("postgres://")) {
-            dbUrl = "jdbc:postgresql://" + dbUrl.substring(11);
-        } else if (dbUrl.startsWith("postgresql://")) {
-            dbUrl = "jdbc:" + dbUrl;
+        Connection conn;
+        if (dbUrl.startsWith("postgres://") || dbUrl.startsWith("postgresql://")) {
+            java.net.URI uri = new java.net.URI(dbUrl);
+            String userInfo = uri.getUserInfo();
+            String user = "";
+            String pass = "";
+            if (userInfo != null && userInfo.contains(":")) {
+                user = userInfo.split(":")[0];
+                pass = userInfo.split(":")[1];
+            }
+            String jdbcUrl = "jdbc:postgresql://" + uri.getHost() + (uri.getPort() == -1 ? "" : ":" + uri.getPort()) + uri.getPath();
+            if (uri.getQuery() != null) {
+                jdbcUrl += "?" + uri.getQuery();
+            }
+            conn = DriverManager.getConnection(jdbcUrl, user, pass);
+        } else {
+            // Fallback for standard JDBC URLs
+            if (!dbUrl.startsWith("jdbc:")) {
+                dbUrl = "jdbc:" + dbUrl;
+            }
+            conn = DriverManager.getConnection(dbUrl);
         }
-        
-        Connection conn = DriverManager.getConnection(dbUrl);
         
         // Ensure the alerts table exists so it works perfectly out of the box
         Statement st = conn.createStatement();
