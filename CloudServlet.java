@@ -153,16 +153,25 @@ import java.sql.*;
 public class CloudServlet extends HttpServlet {
 
     public Connection getConnection() throws Exception {
-        Class.forName("org.sqlite.JDBC");
+        Class.forName("org.postgresql.Driver");
         
-        // Use a local file for SQLite DB
-        String dbUrl = "jdbc:sqlite:cloud_db.db";
+        String dbUrl = System.getenv("DB_URL");
+        if (dbUrl == null || dbUrl.isEmpty()) {
+            throw new Exception("DB_URL environment variable is missing! Please set it in Render Dashboard.");
+        }
+        
+        // Render provides 'postgres://...' but JDBC needs 'jdbc:postgresql://...'
+        if (dbUrl.startsWith("postgres://")) {
+            dbUrl = "jdbc:postgresql://" + dbUrl.substring(11);
+        } else if (dbUrl.startsWith("postgresql://")) {
+            dbUrl = "jdbc:" + dbUrl;
+        }
         
         Connection conn = DriverManager.getConnection(dbUrl);
         
         // Ensure the alerts table exists so it works perfectly out of the box
         Statement st = conn.createStatement();
-        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId TEXT PRIMARY KEY, type TEXT, message TEXT, status TEXT)");
+        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId VARCHAR(50) PRIMARY KEY, type VARCHAR(50), message VARCHAR(255), status VARCHAR(20))");
         st.close();
         
         return conn;

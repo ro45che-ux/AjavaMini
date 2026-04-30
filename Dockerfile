@@ -12,8 +12,8 @@ COPY . /usr/local/tomcat/webapps/ROOT
 # Set working directory to ROOT
 WORKDIR /usr/local/tomcat/webapps/ROOT
 
-# Download SQLite JDBC driver directly into WEB-INF/lib
-RUN curl -L -o WEB-INF/lib/sqlite-jdbc-3.41.2.1.jar https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.41.2.1/sqlite-jdbc-3.41.2.1.jar
+# Download PostgreSQL JDBC driver directly into WEB-INF/lib
+RUN curl -L -o WEB-INF/lib/postgresql-42.7.3.jar https://jdbc.postgresql.org/download/postgresql-42.7.3.jar
 
 # Compile Java files using the servlet-api, mysql-connector, and sqlite jars
 RUN javac -cp "lib/*:WEB-INF/lib/*" -d WEB-INF/classes *.java
