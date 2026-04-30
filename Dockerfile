@@ -12,7 +12,10 @@ COPY . /usr/local/tomcat/webapps/ROOT
 # Set working directory to ROOT
 WORKDIR /usr/local/tomcat/webapps/ROOT
 
-# Compile Java files using the servlet-api and mysql-connector jars
+# Download SQLite JDBC driver directly into WEB-INF/lib
+RUN curl -L -o WEB-INF/lib/sqlite-jdbc-3.41.2.1.jar https://repo1.maven.org/maven2/org/xerial/sqlite-jdbc/3.41.2.1/sqlite-jdbc-3.41.2.1.jar
+
+# Compile Java files using the servlet-api, mysql-connector, and sqlite jars
 RUN javac -cp "lib/*:WEB-INF/lib/*" -d WEB-INF/classes *.java
 
 # Clean up source files from the deployed webapp
