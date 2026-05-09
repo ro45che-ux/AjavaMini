@@ -229,6 +229,20 @@ public class CloudServlet extends HttpServlet {
                 ps.setString(3,msg);
                 ps.setString(4,"ACTIVE");
                 ps.executeUpdate();
+                
+                // Write to a separate log file
+                try {
+                    String path = "alerts_log.txt";
+                    // Try to write directly to your Mac's project folder if running locally
+                    if (new java.io.File("/Users/chetann/Desktop/CloudServletProject").exists()) {
+                        path = "/Users/chetann/Desktop/CloudServletProject/alerts_log.txt";
+                    }
+                    java.io.FileWriter fw = new java.io.FileWriter(path, true);
+                    fw.write(new java.util.Date() + " - ID: " + id + " | TYPE: " + t + " | MESSAGE: " + msg + "\n");
+                    fw.close();
+                } catch (Exception ex) {
+                    // Ignore file write errors
+                }
             }
 
             // RESOLVE
@@ -245,33 +259,6 @@ public class CloudServlet extends HttpServlet {
                         "UPDATE alerts SET status='BLOCKED' WHERE alertId=?");
                 ps.setString(1,idParam);
                 ps.executeUpdate();
-            }
-
-            // VIEW RAW DATABASE
-            if ("viewdb".equals(action)) {
-                out.println("<html><head><style>");
-                out.println("body{background:#0f172a;color:white;font-family:Arial;padding:20px}");
-                out.println("table{width:100%;border-collapse:collapse;margin-top:20px}");
-                out.println("th,td{border:1px solid #334155;padding:10px;text-align:left}");
-                out.println("th{background:#1e293b;color:#38bdf8}");
-                out.println("</style></head><body>");
-                out.println("<h2>Raw Database View (Alerts Table)</h2>");
-                out.println("<a href='?'><button style='padding:8px 14px;background:#38bdf8;border:none;border-radius:20px;cursor:pointer'>Back to Dashboard</button></a>");
-                out.println("<table><tr><th>Alert ID</th><th>Type</th><th>Message</th><th>Status</th></tr>");
-                
-                Statement stDb = con.createStatement();
-                ResultSet rsDb = stDb.executeQuery("SELECT * FROM alerts");
-                while(rsDb.next()) {
-                    out.println("<tr>");
-                    out.println("<td>" + rsDb.getString("alertId") + "</td>");
-                    out.println("<td>" + rsDb.getString("type") + "</td>");
-                    out.println("<td>" + rsDb.getString("message") + "</td>");
-                    out.println("<td>" + rsDb.getString("status") + "</td>");
-                    out.println("</tr>");
-                }
-                out.println("</table></body></html>");
-                con.close();
-                return; // Stop here, don't render the rest of the page
             }
 
             // UI
@@ -292,7 +279,6 @@ public class CloudServlet extends HttpServlet {
             out.println("<a href='?status=RESOLVED'><button>Resolved</button></a>");
             out.println("<a href='?status=BLOCKED'><button>Blocked</button></a>");
             out.println("<a href='?action=add'><button>Received Logs</button></a>");
-            out.println("<a href='?action=viewdb'><button style='background:#f59e0b'>View Raw Database</button></a>");
 
             // SORT BUTTON ONLY FOR ACTIVE
             if (status.equals("ACTIVE")) {
