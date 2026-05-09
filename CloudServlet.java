@@ -153,39 +153,16 @@ import java.sql.*;
 public class CloudServlet extends HttpServlet {
 
     public Connection getConnection() throws Exception {
-        Class.forName("org.postgresql.Driver");
+        Class.forName("org.sqlite.JDBC");
         
-        String dbUrl = System.getenv("DB_URL");
-        if (dbUrl == null || dbUrl.isEmpty()) {
-            throw new Exception("DB_URL environment variable is missing! Please set it in Render Dashboard.");
-        }
+        // Use a local file for SQLite DB
+        String dbUrl = "jdbc:sqlite:cloud_db.db";
         
-        Connection conn;
-        if (dbUrl.startsWith("postgres://") || dbUrl.startsWith("postgresql://")) {
-            java.net.URI uri = new java.net.URI(dbUrl);
-            String userInfo = uri.getUserInfo();
-            String user = "";
-            String pass = "";
-            if (userInfo != null && userInfo.contains(":")) {
-                user = userInfo.split(":")[0];
-                pass = userInfo.split(":")[1];
-            }
-            String jdbcUrl = "jdbc:postgresql://" + uri.getHost() + (uri.getPort() == -1 ? "" : ":" + uri.getPort()) + uri.getPath();
-            if (uri.getQuery() != null) {
-                jdbcUrl += "?" + uri.getQuery();
-            }
-            conn = DriverManager.getConnection(jdbcUrl, user, pass);
-        } else {
-            // Fallback for standard JDBC URLs
-            if (!dbUrl.startsWith("jdbc:")) {
-                dbUrl = "jdbc:" + dbUrl;
-            }
-            conn = DriverManager.getConnection(dbUrl);
-        }
+        Connection conn = DriverManager.getConnection(dbUrl);
         
         // Ensure the alerts table exists so it works perfectly out of the box
         Statement st = conn.createStatement();
-        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId VARCHAR(50) PRIMARY KEY, type VARCHAR(50), message VARCHAR(255), status VARCHAR(20))");
+        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId TEXT PRIMARY KEY, type TEXT, message TEXT, status TEXT)");
         st.close();
         
         return conn;
