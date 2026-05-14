@@ -18,7 +18,7 @@ public class GenerateLocalDB {
             
             conn.close();
             System.out.println("Super obvious row added successfully!");
-ok         } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
