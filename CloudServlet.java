@@ -168,7 +168,7 @@ public class CloudServlet extends HttpServlet {
             
         // Ensure the alerts table exists in the cloud database
         Statement st = conn.createStatement();
-        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId VARCHAR(50) PRIMARY KEY, alertType VARCHAR(100), message TEXT, status VARCHAR(20))");
+        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId VARCHAR(50) PRIMARY KEY, type VARCHAR(100), message TEXT, status VARCHAR(20))");
         st.close();
             
         return conn;
@@ -206,7 +206,7 @@ public class CloudServlet extends HttpServlet {
                 String msg = log.substring(log.indexOf(":")+2);
 
                 PreparedStatement ps = con.prepareStatement(
-                        "INSERT INTO alerts (alertId, alertType, message, status) VALUES (?, ?, ?, ?)");
+                        "INSERT INTO alerts (alertId, type, message, status) VALUES (?, ?, ?, ?)");
                 ps.setString(1,id);
                 ps.setString(2,t);
                 ps.setString(3,msg);
