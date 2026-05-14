@@ -160,7 +160,9 @@ public class CloudServlet extends HttpServlet {
         java.net.URI dbUri = new java.net.URI(renderDbUrl);
         String username = dbUri.getUserInfo().split(":")[0];
         String password = dbUri.getUserInfo().split(":")[1];
-        String dbUriJdbc = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+        int port = dbUri.getPort();
+        if (port == -1) port = 5432;
+        String dbUriJdbc = "jdbc:postgresql://" + dbUri.getHost() + ':' + port + dbUri.getPath();
             
         Connection conn = DriverManager.getConnection(dbUriJdbc, username, password);
             
