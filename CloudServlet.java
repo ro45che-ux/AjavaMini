@@ -153,18 +153,22 @@ import java.sql.*;
 public class CloudServlet extends HttpServlet {
 
     public Connection getConnection() throws Exception {
-        Class.forName("org.sqlite.JDBC");
+        String renderDbUrl = System.getenv("DATABASE_URL");
         
-        // Use a local file for SQLite DB
-        String dbUrl = "jdbc:sqlite:cloud_db.db";
-        
-        Connection conn = DriverManager.getConnection(dbUrl);
-        
-        // Ensure the alerts table exists so it works perfectly out of the box
+        // This connects directly to Render's PostgreSQL Cloud Database
+        Class.forName("org.postgresql.Driver");
+        java.net.URI dbUri = new java.net.URI(renderDbUrl);
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUriJdbc = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+            
+        Connection conn = DriverManager.getConnection(dbUriJdbc, username, password);
+            
+        // Ensure the alerts table exists in the cloud database
         Statement st = conn.createStatement();
-        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId TEXT PRIMARY KEY, type TEXT, message TEXT, status TEXT)");
+        st.execute("CREATE TABLE IF NOT EXISTS alerts (alertId VARCHAR(50) PRIMARY KEY, alertType VARCHAR(100), message TEXT, status VARCHAR(20))");
         st.close();
-        
+            
         return conn;
     }
 
@@ -200,7 +204,7 @@ public class CloudServlet extends HttpServlet {
                 String msg = log.substring(log.indexOf(":")+2);
 
                 PreparedStatement ps = con.prepareStatement(
-                        "INSERT INTO alerts VALUES (?, ?, ?, ?)");
+                        "INSERT INTO alerts (alertId, alertType, message, status) VALUES (?, ?, ?, ?)");
                 ps.setString(1,id);
                 ps.setString(2,t);
                 ps.setString(3,msg);

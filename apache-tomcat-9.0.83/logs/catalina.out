@@ -1,0 +1,49 @@
+NOTE: Picked up JDK_JAVA_OPTIONS:  --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.util.concurrent=ALL-UNNAMED --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-May-2026 21:04:31.153 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.83
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 9 2023 20:57:42 UTC
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.83.0
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            15.7.5
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          aarch64
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /Library/Java/JavaVirtualMachines/temurin-25.jdk/Contents/Home
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           25.0.1+8-LTS
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Eclipse Adoptium
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83
+14-May-2026 21:04:31.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83
+14-May-2026 21:04:31.169 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+14-May-2026 21:04:31.169 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+14-May-2026 21:04:31.169 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+14-May-2026 21:04:31.169 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+14-May-2026 21:04:31.169 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+14-May-2026 21:04:31.169 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/conf/logging.properties
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83
+14-May-2026 21:04:31.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/temp
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by org.apache.tomcat.jni.Library in an unnamed module (file:/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/lib/tomcat-jni.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+14-May-2026 21:04:31.177 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/chetann/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+14-May-2026 21:04:31.328 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-May-2026 21:04:31.349 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [287] milliseconds
+14-May-2026 21:04:31.367 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+14-May-2026 21:04:31.367 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.83]
+14-May-2026 21:04:31.371 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/docs]
+14-May-2026 21:04:31.488 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/docs] has finished in [115] ms
+14-May-2026 21:04:31.488 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/manager]
+14-May-2026 21:04:31.504 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/manager] has finished in [16] ms
+14-May-2026 21:04:31.504 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/examples]
+14-May-2026 21:04:31.599 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/examples] has finished in [95] ms
+14-May-2026 21:04:31.599 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/ROOT]
+14-May-2026 21:04:31.720 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+14-May-2026 21:04:31.724 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/ROOT] has finished in [124] ms
+14-May-2026 21:04:31.724 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/host-manager]
+14-May-2026 21:04:31.736 INFO [main] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/chetann/Desktop/CloudServletProject/apache-tomcat-9.0.83/webapps/host-manager] has finished in [12] ms
+14-May-2026 21:04:31.738 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-May-2026 21:04:31.742 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [392] milliseconds
