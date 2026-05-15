@@ -10,12 +10,6 @@
         <servlet-name>CloudServlet</servlet-name>
         <url-pattern>/CloudServlet</url-pattern>
     </servlet-mapping>
-    
-    <!-- This empty pattern maps exactly to the root URL (/) -->
-    <servlet-mapping>
-        <servlet-name>CloudServlet</servlet-name>
-        <url-pattern></url-pattern>
-    </servlet-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>LoginServlet</servlet-class>
